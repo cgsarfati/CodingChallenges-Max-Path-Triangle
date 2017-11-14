@@ -102,6 +102,24 @@ def make_triangle(levels):
 def maxpath(nodes):
     """Given list of nodes in triangle, return high-scoring path."""
 
+    # Initialize counter
+    best = 0
+
+    for n in nodes:
+
+        # Top of graph
+        if not n.parents:
+            n.best = n.value
+
+        # Get highest-value parent and add this value
+        else:
+            n.best = n.value + max(p.best for p in n.parents)
+
+        # Update counter
+        best = max(n.best, best)
+
+    return best
+
 
 if __name__ == '__main__':
     import doctest
